@@ -28,6 +28,22 @@ function registerUser($ID, $Name, $email, $password, $prix_c, $location, $userTy
   
 }
 ?>
+<?php
+// Check if the form is submitted for registration
+if (isset($_POST['register'])) {
+    $ID = $_POST['ID'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $prix_c = $_POST['prix_c'];
+    $location = $_POST['location'];
+    $userType = isset($_POST['userType']) ? $_POST['userType'] : '';
+    registerUser($ID, $name, $email, $password, $prix_c, $location, $userType);
+    echo "Hey!";
+    exit(); // Add an exit to stop further execution
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -123,11 +139,6 @@ function registerUser($ID, $Name, $email, $password, $prix_c, $location, $userTy
                     /* body {
                               font-family: Arial, sans-serif;
                               /* background-color: purple ; */
-                    font-family: Verdana,
-                    Geneva,
-                    Tahoma,
-                    sans-serif;
-                    }
 
                     */ form {
                               max-width: 300px;
@@ -154,7 +165,7 @@ function registerUser($ID, $Name, $email, $password, $prix_c, $location, $userTy
           <br>
           <div class="form-container">
                     <form method="post" action="">
-                              <label>CIN</label>
+                    <label>CIN</label>
                               <input type="text" name="ID" required>
                               <br>
                               <label>Name:</label>
@@ -174,8 +185,10 @@ function registerUser($ID, $Name, $email, $password, $prix_c, $location, $userTy
                               <br>
                               <!-- Add the checkbox for user type in the registration form -->
 <label>User Type:</label>
-<input type="checkbox" name="userType" value="vendeur"> Vendeur
-<input type="checkbox" name="userType" value="client"> Client
+<input type="radio" name="userType" value="vendeur"> Vendeur
+<label for="vendeur"></label>
+<input type="radio" name="userType" value="client"> Client
+<label for="client"></label>
 <br>
 <input type="submit" name="register" value="Register">
                     </form>
@@ -185,18 +198,3 @@ function registerUser($ID, $Name, $email, $password, $prix_c, $location, $userTy
 
 </html>
 
-<?php
-// Check if the form is submitted for registration
-if (isset($_POST['register'])) {
-          $ID = $_POST['ID'];
-          $name = $_POST['name'];
-          $email = $_POST['email'];
-          $password = $_POST['password'];
-          $prix_c = $_POST['prix_c'];
-          $location = $_POST['location'];
-          $userType = isset($_POST['userType']) ? $_POST['userType'] : '';
-    registerUser($ID, $name, $email, $password, $prix_c, $location, $userType);
-          echo "Hey!";
-}
-
-?>
